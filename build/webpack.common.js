@@ -8,14 +8,15 @@ const { PORT } = require('./config');
 
 module.exports = {
     entry: {
-        index: [
+        gallery: [
             `webpack-dev-server/client?http://localhost:${PORT}`,
             'webpack/hot/only-dev-server',
-            './client/index/index.jsx'
+            './client/gallery/gallery.jsx'
         ],
     },
     output: {
         path: path.resolve(__dirname, '../dist'),
+        publicPath: '/'
     },
     module: {
         rules: [
@@ -32,7 +33,7 @@ module.exports = {
                         loader: 'babel-loader',
                         options: {
                             presets: ['es2015', 'stage-3', 'react'],
-                            plugins: ['transform-runtime']
+                            plugins: ['transform-object-rest-spread', 'transform-runtime']
                         }
                     }
                 ],
@@ -49,33 +50,34 @@ module.exports = {
                                     require('autoprefixer')({ browsers: ['last 10 Chrome versions', 'last 5 Firefox versions', 'Safari >= 6', 'ie > 8'] })
                                 ]
                             }
-                        }
+                        },
                     ]
                 }),
             },
             {
                 test: /\.(png|jpg|gif|otf|eot|svg|ttf|woff|woff2)([?]?.*)$/,
-                include: [path.resolve(__dirname, '../client/assets')],
-                use: [
-                    {
-                        loader: 'url-loader',
-                        options: {
-                            query: {
-                                useRelativePath: true,
-                                name: '[name].[ext]',
-                                limit: 8192
-                            }
-                        }
-                    }
-                ],
+                include: [path.resolve(__dirname, '../client')],
+                use: ['url-loader?limit=8192&name=assets/images/[name].[hash:8].[ext]'],
             },
         ]
     },
+    resolve: {
+        extensions: [".js", ".json", ".jsx", ".css"],
+        alias: {
+            'styles': path.resolve(__dirname, '../client/gallery/assets/styles/')
+        }
+    },
     plugins: [
         new HtmlPlugin({
-            filename: 'index.html',
-            template: path.resolve(__dirname, '../client/index/index.html'),
-            chunks: ['index', 'manifest']
+            filename: 'gallery.html',
+            template: path.resolve(__dirname, '../client/gallery/gallery.html'),
+            chunks: ['gallery', 'manifest']
+        }),
+        new webpack.ProvidePlugin({
+            React: 'react',
+            $: 'jquery',
+            jQuery: 'jquery',
+            'window.jQuery': 'jquery',
         }),
         new webpack.optimize.CommonsChunkPlugin({
             name: ['manifest'],

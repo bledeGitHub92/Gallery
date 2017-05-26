@@ -7,7 +7,7 @@ var ExtractTextPlugin = require('extract-text-webpack-plugin');
 module.exports = Merge(commonConfig, {
     devtool: 'cheap-module-eval-source-map',
     output: {
-        filename: '[name].js',
+        filename: 'assets/scripts/[name].js',
     },
     plugins: [
         new webpack.NamedModulesPlugin(), // 生成稳定的模块 ID

@@ -6,7 +6,7 @@ var ExtractTextPlugin = require('extract-text-webpack-plugin');
 module.exports = Merge(commonConfig, {
     devtool: 'source-map',
     output: {
-        filename: '[name].[chunkhash:8].js',
+        filename: 'assets/scripts/[name].[chunkhash:8].js',
         chunkFilename: '[name].[chunkhash:8].js',
         sourceMapFilename: '[name].map'
     },
@@ -17,4 +17,4 @@ module.exports = Merge(commonConfig, {
             compress: process.env.NODE_ENV === 'production'
         })
     ]
-})
+});

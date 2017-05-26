@@ -1,0 +1,16 @@
+.navBar {
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+}
+
+.navBar > li {
+    color: #fff;
+    width: 40px;
+    height: 40px;
+    margin: 0 10px;
+    float: left;
+    border: 2px solid #fff;
+    border-radius: 50%;
+    cursor: pointer;
+}

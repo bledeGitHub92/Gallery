@@ -1,0 +1,29 @@
+.clearfix:before, .clearfix:after { content: "\0020"; display: block; height: 0; overflow: hidden; }  
+.clearfix:after { clear: both; }  
+.clearfix { zoom: 1; }  
+
+.waterFallWrapper {
+    margin-top: 48px;
+}
+
+.waterFall {
+    position: relative;
+    margin: 0 auto;
+}
+
+.waterFallItem {
+    font-size: 0;
+    float: left;
+    /*transition: left .3s ease-in-out,top .3s ease-in-out;*/
+}
+
+.pin {
+    padding: 10px;
+    box-shadow: 0 1px 3px rgba(0,0,0,.3);
+    background: #fff;
+}
+
+.pin img {
+    width: 216px;
+    height: auto;
+}

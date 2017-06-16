@@ -1,0 +1,46 @@
+.navMenu {
+    color: #fff;
+    width: 100%;
+    height: 100%;
+}
+
+.navMenu h3 {
+    font-size: 36px;
+    font-weight: normal;
+    line-height: 140px;
+    padding-left: 30px;
+}
+
+.navMenu a, .navMenu span {
+    display: inline-block;
+    width: 100%;
+    cursor: pointer;
+    color: #aaa;
+    padding-left: 30px;
+}
+
+.navMenu a:hover, .navMenu span:hover {
+    color: #fff;
+}
+
+.navMenu li {
+    line-height: 49px;
+    border-top: 1px solid #272727; 
+}
+
+.navMenu li.active a, .navMenu li.active span {
+    color: #fff;
+    background: #2a2a2a;
+}
+
+.move {
+    background: rgba(255,255,255, .6);
+    position: absolute;
+    left: 0;
+    animation: active .6s infinite;
+}
+
+@keyframes active {
+    from { left: 0 }
+    to { left: 440px }
+}

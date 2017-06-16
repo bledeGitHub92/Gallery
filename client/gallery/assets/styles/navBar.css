@@ -1,13 +1,15 @@
 .navBar {
-    position: fixed;
+    z-index: 999;
+    position: absolute;
     right: 20px;
     bottom: 20px;
+    transition: bottom .3s;
 }
 
 .navBar > li {
     color: #fff;
-    width: 40px;
-    height: 40px;
+    width: 36px;
+    height: 36px;
     margin: 0 10px;
     float: left;
     border: 2px solid #fff;

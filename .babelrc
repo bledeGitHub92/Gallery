@@ -1,0 +1,23 @@
+{
+    "presets": [
+        "es2015",
+        "stage-3",
+        "react"
+    ],
+    "plugins": [
+        [
+            "module-resolver",
+            {
+                "root": [
+                    "./client/gallery/"
+                ],
+                "alias": {
+                    "styles": "/assets/styles/"
+                }
+            }
+        ],
+        "transform-object-rest-spread",
+        "transform-runtime",
+        "istanbul"
+    ]
+}

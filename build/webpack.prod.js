@@ -13,8 +13,15 @@ module.exports = Merge(commonConfig, {
     plugins: [
         new ExtractTextPlugin('assets/styles/[name].[contenthash:8].css'),
         new webpack.HashedModuleIdsPlugin(), // 生成稳定的模块 ID
+        new webpack.DefinePlugin({
+            'process.env': {
+                'NODE_ENV': JSON.stringify('production')
+            }
+        }),
         new webpack.optimize.UglifyJsPlugin({
-            compress: process.env.NODE_ENV === 'production'
+            compress: {
+                warnings: false
+            }
         })
     ]
 });

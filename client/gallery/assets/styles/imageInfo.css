@@ -1,0 +1,20 @@
+.imageInfo {
+    letter-spacing: .8px;
+    line-height: 18px;
+}
+.imageInfo dt {
+    font-size: 18px;
+    margin-bottom: 7px;
+    font-weight: bold;
+}
+
+.imageInfo dd {
+    color: #aaa;
+    margin-bottom: 16px;
+    font-size: 13px;
+    line-height: 18px;
+}
+
+.imageInfo p {
+    font-size: 13px;
+ }

@@ -1,8 +1,13 @@
-import ReactDOM from 'react-dom';
-// import CommentBox from './components/CommentBox';
-import GalleryBox from './components/GalleryBox';
+import 'styles/layout.css';
+import { render } from 'react-dom';
+import Main, { store } from './Main';
+import { Provider } from 'react-redux';
+import EventEmitter from 'events';
+let emitter = new EventEmitter;
 
-ReactDOM.render(
-    <GalleryBox></GalleryBox>,
+render(
+    <Provider store={store}>
+        <Main emitter={emitter} />
+    </Provider>,
     document.getElementById('Gallery')
 );

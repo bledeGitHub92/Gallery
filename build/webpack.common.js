@@ -4,15 +4,11 @@ var HtmlPlugin = require('html-webpack-plugin');
 var WebpackChunkHash = require('webpack-chunk-hash');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var ChunkManifestPlugin = require("chunk-manifest-webpack-plugin");
-const { PORT } = require('./config');
 
 module.exports = {
     entry: {
-        gallery: [
-            `webpack-dev-server/client?http://localhost:${PORT}`,
-            'webpack/hot/only-dev-server',
-            './client/gallery/gallery.jsx'
-        ],
+        gallery: './client/gallery/gallery.jsx',
+        vendor: ['jquery', 'react', 'react-dom', 'react-router', 'react-router-dom', 'redux', 'react-redux']
     },
     output: {
         path: path.resolve(__dirname, '../dist'),
@@ -29,20 +25,19 @@ module.exports = {
                 include: [path.resolve(__dirname, '../client')],
                 use: [
                     { loader: 'react-hot-loader' },
-                    {
-                        loader: 'babel-loader',
-                        options: {
-                            presets: ['es2015', 'stage-3', 'react'],
-                            plugins: ['transform-object-rest-spread', 'transform-runtime']
-                        }
-                    }
+                    { loader: 'babel-loader' }
                 ],
             },
             {
                 test: /\.css$/,
                 use: ExtractTextPlugin.extract({
                     use: [
-                        { loader: 'css-loader' },
+                        {
+                            loader: 'css-loader',
+                            options: {
+                                minimize: true //css压缩
+                            }
+                        },
                         {
                             loader: 'postcss-loader',
                             options: {
@@ -71,7 +66,19 @@ module.exports = {
         new HtmlPlugin({
             filename: 'gallery.html',
             template: path.resolve(__dirname, '../client/gallery/gallery.html'),
-            chunks: ['gallery', 'manifest']
+            chunks: ['gallery', 'vendor', 'manifest'],
+            minify: {
+                removeComments: true,
+                collapseWhitespace: true,
+                removeRedundantAttributes: true,
+                useShortDoctype: true,
+                removeEmptyAttributes: true,
+                removeStyleLinkTypeAttributes: true,
+                keepClosingSlash: true,
+                minifyJS: true,
+                minifyCSS: true,
+                minifyURLs: true,
+            },
         }),
         new webpack.ProvidePlugin({
             React: 'react',
@@ -80,7 +87,7 @@ module.exports = {
             'window.jQuery': 'jquery',
         }),
         new webpack.optimize.CommonsChunkPlugin({
-            name: ['manifest'],
+            name: ['vendor', 'manifest'],
             minChunks: Infinity
         }),
         new WebpackChunkHash(), // 基于文件的内容生成文件哈希
